@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\CartDetile;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller
 {
@@ -12,8 +15,14 @@ class DashboardUserController extends Controller
      */
     public function index()
     {
-        return view('user.dashboard');
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        foreach ($carts as $cart) {            
+            $cart_detiles = CartDetile::where('cart_id', $cart->id)->get();
+            return view('user.dashboard', compact('carts', 'cart_detiles'));
+        }
     }
+
+
 
     /**
      * Show the form for creating a new resource.

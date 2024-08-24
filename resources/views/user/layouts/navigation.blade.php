@@ -1,12 +1,12 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-gray-700 border-b border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="/">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 " />
+                    <a href="{{ route('home') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-white" />
                     </a>
                 </div>
 
@@ -18,12 +18,31 @@
                 </div>
             </div>
 
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <?php $cart = \App\Models\Cart::where('user_id', Auth::user()->id)
+                    ->where('status', 0)
+                    ->first();
+                if (!empty($cart)) {
+                    $notif = \App\Models\CartDetile::where('cart_id', $cart->id)->count();
+                } else {
+                    $notif = 0;
+                }
+                ?>
+                <a href="{{ route('checkout') }}"
+                    class="relative inline-flex items-center font-medium text-center text-white hover:text-orange-500 text-3xl me-3">
+                    <i class='bx bx-cart-alt'></i>
+                    <span class="sr-only">Notifications</span>
+                    <div
+                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 rounded-full -top-2 -end-4 dark:border-gray-900">
+                        {{ $notif }}</div>
+                </a>
+                <span class="w-1 h-10 bg-gray-100 ms-3 rounded-lg"></span>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900  bg-white  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white   hover:text-orange-500 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">

@@ -10,19 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-/**
- * @OA\Post(
- *    path="/api/register",
- *    tags={"Auth"},
- *    summary="register",
- *    description="enter your description",
- *    operationId="register",
- *    @OA\Response(
- *        response="default",
- *        description="return array model register",
- *    )
- * )
-*/
+ /**
+     * Register user
+     * 
+     * Registering new user
+     * 
+     * @unauthenticated
+     * 
+     * @param \App\Http\Requests\Auth\RegisterRequest $request
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function register(Request $request) {        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -51,6 +50,17 @@ class AuthController extends Controller
         ]);
     }
 
+        /**
+     * Login user
+     * 
+     * Logging in user
+     * 
+     * @unauthenticated
+     * 
+     * @param \App\Http\Requests\Auth\LoginRequest $request
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request){
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $auth = Auth::user();

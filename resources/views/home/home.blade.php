@@ -9,7 +9,7 @@
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 2000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
@@ -23,13 +23,34 @@
         </script>
     @endif
 
+    @if (session()->has('successCheckout'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Product Succes Checkout"
+            });
+        </script>
+    @endif
+
+
     @if (session()->has('warning'))
         <script>
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 2000,
                 timerProgressBar: true,
                 didOpen: (toast) => {
                     toast.onmouseenter = Swal.stopTimer;
@@ -68,7 +89,7 @@
         </div>
     </header>
 
-    <section class="bg-gray-700 ">
+    <section id="category" class="bg-gray-700 ">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-items-start pb-5">
                 <h1 class="text-4xl font-semibold text-white">Category</h1>
@@ -96,7 +117,7 @@
         </div>
     </section>
 
-    <section class="">
+    <section id="newProducts">
         <div class=" h-full bg-gray-700 pb-10 min-h-screen">
             <div class="max-w-7xl mx-auto">
                 <div class="flex items-center justify-items-start pb-8">

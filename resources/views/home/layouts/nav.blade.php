@@ -87,12 +87,12 @@
                             aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="/#category"
                             class="block py-2 px-3 sm:text-white text-gray-500 hover:text-orange-400 animation-all duration-300"
                             aria-current="page">Category</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="/#newProducts"
                             class="block py-2 px-3 sm:text-white text-gray-500 hover:text-orange-400 animation-all duration-300"
                             aria-current="page">Products</a>
                     </li>

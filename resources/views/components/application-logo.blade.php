@@ -1,1 +1,1 @@
-<i class='bx bx-store text-4xl text-gray-700'></i>
+<i class='bx bx-store text-4xl text-white'></i>

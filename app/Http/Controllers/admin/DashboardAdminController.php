@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\ProductCategory;
+use App\Http\Controllers\Controller;
 
 class DashboardAdminController extends Controller
 {
@@ -12,7 +15,11 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $countProduct = Product::all()->count();
+        $countCategory = ProductCategory::all()->count();
+        $countUser = User::all()->count();
+        $countActiveProduct = Product::where('status', 'active')->count();
+        return view('admin.dashboard' , compact('countProduct', 'countCategory', 'countUser', 'countActiveProduct'));
     }
 
     /**
