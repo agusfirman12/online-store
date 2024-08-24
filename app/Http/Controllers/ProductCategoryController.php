@@ -37,7 +37,7 @@ class ProductCategoryController extends Controller
 
         ProductCategory::create($validateData);
 
-        return redirect()->route('manage-category.index')->with('success', 'New Category Added');
+        return redirect()->route('admin.category')->with('success', 'New Category Added');
     }
 
     /**
@@ -69,7 +69,7 @@ class ProductCategoryController extends Controller
 
         ProductCategory::where('id', $id)->update($validateData);
 
-        return redirect()->route('manage-category.index')->with('success', 'Category Updated');
+        return redirect()->route('admin.category')->with('success', 'Category Updated');
     }
 
     /**
@@ -78,6 +78,6 @@ class ProductCategoryController extends Controller
     public function destroy(string $id)
     {
         ProductCategory::destroy($id);
-        return redirect('/admin/manage-category')->with('deleted', 'Category Deleted');
+        return redirect(route('admin.category'))->with('deleted', 'Category Deleted');
     }
 }

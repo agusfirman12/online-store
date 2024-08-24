@@ -35,8 +35,8 @@
                     </button>
                 </div>
             @endif
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg ">
-                <div class="p-6 text-gray-900 flex justify-between ">
+            <div class="bg-gray-400  overflow-hidden shadow-sm sm:rounded-lg ">
+                <div class="p-6 text-gray-100 flex justify-between ">
                     <div class="text-xl font-bold flex items-center">{{ __('Category Page') }}</div>
                     <button type="button" data-modal-target="create-category" data-modal-toggle="create-category"
                         class="bg-orange-500 px-4 py-2 text-sm text-white rounded-lg flex items-center" onclick="add()">
@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <div class="bg-white mt-5 overflow-auto shadow-sm sm:rounded-lg ">
+            <div class="bg-gray-400 mt-5 overflow-auto shadow-sm sm:rounded-lg ">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-200">
@@ -68,8 +68,8 @@
                         <tbody>
                             @foreach ($categories as $category)
                                 <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    class="odd:bg-gray-400 odd:dark:bg-gray-900 even:bg-gray-300 text-white even:dark:bg-gray-800 border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-100 whitespace-nowrap">
                                         {{ $category->name }}
                                     </th>
                                     <td class="px-6 py-4">
@@ -108,7 +108,7 @@
     <div id="create-category" tabindex="-1" aria-hidden="true" class="hidden h-">
         <x-modal-create height='h-[26rem] sm:h-[22rem]'>
             <div class="flex justify-between">
-                <h1 id="modal-title" class="text-2xl font-bold mb-4">Add new Category</h1>
+                <h1 id="modal-title" class="text-2xl text-gray-100 font-bold mb-4">Add new Category</h1>
                 <button
                     class="hover:bg-orange-100 hover-text-gray-500 focus:ring-2 focus:ring-orange-200 px-2 rounded-lg"
                     data-modal-hide="create-category">
@@ -152,9 +152,9 @@
     <div id="delete-modal" tabindex="-1"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow">
+            <div class="relative bg-gray-700 rounded-lg shadow">
                 <button type="button"
-                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                    class="absolute top-3 end-2.5 text-gray-100 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                     data-modal-hide="delete-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
@@ -169,7 +169,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to
+                    <h3 class="mb-5 text-lg font-normal text-gray-100">Are you sure you want to
                         delete this product?</h3>
                     <form action="" method="post">
                         @method('DELETE')

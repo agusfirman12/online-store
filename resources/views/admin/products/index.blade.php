@@ -36,8 +36,8 @@
                     </button>
                 </div>
             @endif
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg ">
-                <div class="p-6 text-gray-900 flex justify-between ">
+            <div class="bg-gray-400  overflow-hidden shadow-sm sm:rounded-lg ">
+                <div class="p-6 text-gray-100 flex justify-between ">
                     <div class="text-xl font-bold flex items-center">{{ __('Product Page') }}</div>
                     <button type="button" data-modal-target="create-product" data-modal-toggle="create-product"
                         class="bg-orange-500 px-4 py-2 text-sm text-white rounded-lg flex items-center" onclick="add()">
@@ -78,11 +78,11 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b">
+                                    class="odd:bg-gray-400 odd:dark:bg-gray-900 even:bg-gray-300 even:dark:bg-gray-800 border-b text-white">
                                     <td class="flex justify-center items-center py-2 w-36">
                                         <img src="/storage/{{ $product->photo }}" class="h-full w-full rounded-lg">
                                     </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-100 whitespace-nowrap">
                                         {{ $product->name }}
                                     </th>
                                     <td class="px-6 py-4">
@@ -200,7 +200,7 @@
     <div id="delete-modal" tabindex="-1"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow">
+            <div class="relative bg-gray-700 rounded-lg shadow">
                 <button type="button"
                     class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                     data-modal-hide="delete-modal">
@@ -250,7 +250,7 @@
 
         function edit(id) {
             $('#modal-title').text("Edit Product");
-            $('#create-product form').trigger('reset'); 
+            $('#create-product form').trigger('reset');
             let url = "{{ route('admin.product.update', ':id') }}";
             url = url.replace(':id', id);
             $('#create-product form').attr('action', url);

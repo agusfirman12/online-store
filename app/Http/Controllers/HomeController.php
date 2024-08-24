@@ -38,7 +38,7 @@ class HomeController extends Controller
             $cart = new Cart();
             $cart->user_id = Auth::user()->id;
             $cart->product_id = $id;
-            $cart->quantity = $request->quantity;
+            $cart->quantity = 0;
             $cart->status = 0;
             $cart->total_price = 0;
             $cart->save();
@@ -63,7 +63,9 @@ class HomeController extends Controller
         }
 
         $carts = Cart::where('user_id', Auth::user()->id)->where('status', 0)->first();
+        $cart_detile = CartDetile::where('cart_id', $carts->id)->get();
         $carts->total_price = $carts->total_price + ($product->price * $request->quantity);
+        $carts->quantity = count($cart_detile);
         $carts->update();
 
         return redirect('/')->with('success', 'Product Added To Cart');
@@ -71,7 +73,7 @@ class HomeController extends Controller
 
     public function checkout(){
         $carts = Cart::where('user_id', Auth::user()->id)->where('status', 0)->first();
-        if (!empty($carts)) {
+        if (!empty($carts) && $carts->total_price > 0) {
             $cart_detiles = CartDetile::where('cart_id', $carts->id)->get();
             return view('home.checkout', compact('carts', 'cart_detiles'));
         }
@@ -79,14 +81,38 @@ class HomeController extends Controller
     }
 
     public function deleteCart($id){
-        CartDetile::destroy($id);
-        return redirect('/checkout')->with('deleted', 'Product Deleted');
+            // Get the cart for the authenticated user where status is 0
+    $cart = Cart::where('user_id', Auth::user()->id)->where('status', 0)->first();
+    
+    if ($cart) {
+        // Find the cart detail to be deleted by its id
+        $cart_detile = CartDetile::where('id', $id)->where('cart_id', $cart->id)->first();
+
+        if ($cart_detile) {
+            // Subtract the total price of the cart detail from the cart's total price
+            $cart->total_price -= $cart_detile->price_total;
+            $cart->save(); // Save the updated cart
+
+            // Delete the cart detail
+            $cart_detile->delete();
+
+            if ($cart->total_price <= 0) {
+                return redirect('/')->with('deleted', 'cart is empty');
+            }
+
+            return redirect('/checkout')->with('deleted', 'Product Deleted');
+        } else {
+            return redirect('/checkout')->with('error', 'Cart detail not found.');
+        }
+    } else {
+        return redirect('/checkout')->with('error', 'Cart not found.');
+    }
     }
 
     public function confirmCheckout(){
         $carts = Cart::where('user_id', Auth::user()->id)->where('status', 0)->first();
         $carts->status = 1;
         $carts->update();
-        return redirect('/')->with('success', 'Checkout Success');
+        return redirect('/')->with('successCheckout', 'Checkout Success');
     }
 }

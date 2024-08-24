@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     Route::get('/category',[ProductCategoryController::class, 'index'])->name('category')->middleware('check-role:admin');
     Route::post('/category',[ProductCategoryController::class, 'store'])->name('category.store')->middleware('check-role:admin');
-    Route::post('/category/{id}',[ProductCategoryController::class, 'update'])->name('category.update')->middleware('check-role:admin');
+    Route::put('/category/{id}',[ProductCategoryController::class, 'update'])->name('category.update')->middleware('check-role:admin');
     Route::get('/category/{id}',[ProductCategoryController::class, 'show'])->name('category.show')->middleware('check-role:admin');
     Route::delete('/category/{id}',[ProductCategoryController::class, 'destroy'])->name('category.destroy')->middleware('check-role:admin');
     

@@ -10,4 +10,8 @@ class Cart extends Model
     use HasFactory;
     
     protected $guarded = ['id'];
+
+    public function cart_detiles(){
+        return $this->hasMany(CartDetile::class);
+    }
 }
