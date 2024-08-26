@@ -78,7 +78,7 @@
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-white">
                             <i class="bx bx-search"></i>
                         </div>
-                        <input type="search" id="default-search"
+                        <input type="text" id="search"
                             class="block w-full px-5 py-3 ps-10 text-sm text-white rounded-2xl bg-gray-600 focus:ring-gray-500 focus:border-gray-500 placeholder:text-gray-300"
                             placeholder="Search Products...." required />
 
@@ -124,7 +124,7 @@
                     <h1 class="text-4xl font-semibold text-white">New Products</h1>
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-center md:justify-start items-center">
+                <div id="product" class="flex flex-col md:flex-row justify-center md:justify-start items-center">
                     @if ($products->count() < 0)
                         <h1 class="text-xl text-white font-bold">No Product yet</h1>
                     @else
@@ -196,3 +196,29 @@
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{{-- jquery --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#search').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $.ajax({
+                url: "{{ route('product.search') }}",
+                type: "GET",
+                data: {
+                    'search': value
+                },
+                success: function(data) {
+                    $('#product').html(data);
+                    if (value == '') {
+                        $('#category').removeClass('hidden');
+                    } else {
+                        $('#category').addClass('hidden');
+                    }
+                }
+            });
+        });
+    });
+</script>

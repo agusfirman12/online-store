@@ -115,4 +115,10 @@ class HomeController extends Controller
         $carts->update();
         return redirect('/')->with('successCheckout', 'Checkout Success');
     }
+
+    public function search(Request $request){
+        $search = $request->search;
+        $products = Product::where('name', 'like', '%'.$search.'%')->get();
+        return view('home.search', compact('products'));
+    }
 }
