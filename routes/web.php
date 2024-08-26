@@ -25,6 +25,7 @@ Route::post('/addtocart/{id}',[HomeController::class, 'addtocart'])->name('addTo
 Route::get('/checkout',[HomeController::class, 'checkout'])->name('checkout');
 Route::delete('/deleteCart/{id}',[HomeController::class, 'deleteCart'])->name('deleteCart');
 Route::get('/confirm-checkout', [HomeController::class, 'confirmCheckout'])->name('confirm.checkout');
+Route::get('/search', [HomeController::class, 'search'])->name('product.search');
 
 
 Route::middleware('auth')->group(function () {
